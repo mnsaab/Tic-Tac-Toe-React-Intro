@@ -83,11 +83,21 @@ import './index.css';
 
       const moves = history.map((step, move) => {
         const desc = move ? 'Go to move #' + move + " (" + step.xcoord + ", "+ step.ycoord +  ")" : 'Go to game start';
-        return (
-          <li key={move}>
-            <button onClick={() => this.jumpTo(move)}>{desc}</button>
-          </li>
-        )
+        let button = null;
+        if (move == this.state.stepNumber){
+          return (
+            <li key={move}>
+              <button onClick={() => this.jumpTo(move)}><b>{desc}</b></button>
+            </li>
+          )
+        }
+        else {
+          return (
+            <li key={move}>
+              <button onClick={() => this.jumpTo(move)}>{desc}</button>
+            </li>
+          )
+        }
       });
 
       let status = winner ? 'Winner: ' + winner : 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
